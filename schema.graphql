@@ -1,0 +1,92 @@
+type CancelMarketItem @entity {
+  id: ID!
+  initiator: Bytes! # address
+  itemId: BigInt! # uint256
+  marketEvent: Int! # uint8
+  item_itemId: BigInt! # uint256
+  item_nftContract: Bytes! # address
+  item_tokenId: BigInt! # uint256
+  item_seller: Bytes! # address
+  item_owner: Bytes! # address
+  item_price: BigInt! # uint256
+  item_forSale: Boolean! # bool
+  item_startingTime: BigInt! # uint256
+}
+
+type ListMarketItem @entity {
+  id: ID!
+  initiator: Bytes! # address
+  itemId: BigInt! # uint256
+  marketEvent: Int! # uint8
+  item_itemId: BigInt! # uint256
+  item_nftContract: Bytes! # address
+  item_tokenId: BigInt! # uint256
+  item_seller: Bytes! # address
+  item_owner: Bytes! # address
+  item_price: BigInt! # uint256
+  item_forSale: Boolean! # bool
+  item_startingTime: BigInt! # uint256
+}
+
+type ListMultipleMarketItems @entity {
+  id: ID!
+  initiator: Bytes! # address
+  nftContract: Bytes! # address
+  marketEvent: Int! # uint8
+  tokenIds: [BigInt]! # uint256[]
+}
+
+type MarketSale @entity {
+  id: ID!
+  initiator: Bytes! # address
+  itemId: BigInt! # uint256
+  marketEvent: Int! # uint8
+  marketItem_itemId: BigInt! # uint256
+  marketItem_nftContract: Bytes! # address
+  marketItem_tokenId: BigInt! # uint256
+  marketItem_seller: Bytes! # address
+  marketItem_owner: Bytes! # address
+  marketItem_price: BigInt! # uint256
+  marketItem_forSale: Boolean! # bool
+  marketItem_startingTime: BigInt! # uint256
+}
+
+type MarketplaceCommissionTransaction @entity {
+  id: ID!
+  initiator: Bytes! # address
+  itemId: BigInt! # uint256
+  marketEvent: Int! # uint8
+  platformFee: BigInt! # uint256
+}
+
+type OwnershipTransferred @entity {
+  id: ID!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+}
+
+type UpdateMarketItem @entity {
+  id: ID!
+  initiator: Bytes! # address
+  itemId: BigInt! # uint256
+  marketEvent: Int! # uint8
+  item_itemId: BigInt! # uint256
+  item_nftContract: Bytes! # address
+  item_tokenId: BigInt! # uint256
+  item_seller: Bytes! # address
+  item_owner: Bytes! # address
+  item_price: BigInt! # uint256
+  item_forSale: Boolean! # bool
+  item_startingTime: BigInt! # uint256
+}
+
+type UpdatePlatformFee @entity {
+  id: ID!
+  platformFee: Int! # uint16
+}
+
+type UpdatePlatformFeeRecipient @entity {
+  id: ID!
+  platformFeeRecipient1: Bytes! # address
+  platformFeeRecipient2: Bytes! # address
+}

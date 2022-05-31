@@ -1,0 +1,47 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Marketplace
+    network: matic
+    source:
+      address: "0x0B306BF915C4d645ff596e518fAf3F9669b97016"
+      abi: Marketplace
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - CancelMarketItem
+        - ListMarketItem
+        - ListMultipleMarketItems
+        - MarketSale
+        - MarketplaceCommissionTransaction
+        - OwnershipTransferred
+        - UpdateMarketItem
+        - UpdatePlatformFee
+        - UpdatePlatformFeeRecipient
+      abis:
+        - name: Marketplace
+          file: ./abis/Marketplace.json
+      eventHandlers:
+        - event: CancelMarketItem(address,indexed uint256,indexed uint8,(uint256,address,uint256,address,address,uint256,bool,uint256))
+          handler: handleCancelMarketItem
+        - event: ListMarketItem(address,indexed uint256,indexed uint8,(uint256,address,uint256,address,address,uint256,bool,uint256))
+          handler: handleListMarketItem
+        - event: ListMultipleMarketItems(address,address,indexed uint8,uint256[])
+          handler: handleListMultipleMarketItems
+        - event: MarketSale(address,indexed uint256,indexed uint8,(uint256,address,uint256,address,address,uint256,bool,uint256))
+          handler: handleMarketSale
+        - event: MarketplaceCommissionTransaction(address,indexed uint256,indexed uint8,uint256)
+          handler: handleMarketplaceCommissionTransaction
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: UpdateMarketItem(address,indexed uint256,indexed uint8,(uint256,address,uint256,address,address,uint256,bool,uint256))
+          handler: handleUpdateMarketItem
+        - event: UpdatePlatformFee(uint16)
+          handler: handleUpdatePlatformFee
+        - event: UpdatePlatformFeeRecipient(address,address)
+          handler: handleUpdatePlatformFeeRecipient
+      file: ./src/marketplace.ts

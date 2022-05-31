@@ -1,0 +1,712 @@
+[
+  {
+    "inputs": [
+      { "internalType": "uint16", "name": "feePercent", "type": "uint16" },
+      {
+        "components": [
+          {
+            "internalType": "address payable",
+            "name": "platformFeeRecipient",
+            "type": "address"
+          },
+          { "internalType": "uint8", "name": "feePercent", "type": "uint8" }
+        ],
+        "internalType": "struct NFTMarket.PlatformFee[]",
+        "name": "platformFeeInfo",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "initiator",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "itemId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint8",
+        "name": "marketEvent",
+        "type": "uint8"
+      },
+      {
+        "components": [
+          { "internalType": "uint256", "name": "itemId", "type": "uint256" },
+          {
+            "internalType": "address",
+            "name": "nftContract",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
+          {
+            "internalType": "address payable",
+            "name": "seller",
+            "type": "address"
+          },
+          {
+            "internalType": "address payable",
+            "name": "owner",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "price", "type": "uint256" },
+          { "internalType": "bool", "name": "forSale", "type": "bool" },
+          {
+            "internalType": "uint256",
+            "name": "startingTime",
+            "type": "uint256"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct NFTMarket.MarketItem",
+        "name": "item",
+        "type": "tuple"
+      }
+    ],
+    "name": "CancelMarketItem",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "initiator",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "itemId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint8",
+        "name": "marketEvent",
+        "type": "uint8"
+      },
+      {
+        "components": [
+          { "internalType": "uint256", "name": "itemId", "type": "uint256" },
+          {
+            "internalType": "address",
+            "name": "nftContract",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
+          {
+            "internalType": "address payable",
+            "name": "seller",
+            "type": "address"
+          },
+          {
+            "internalType": "address payable",
+            "name": "owner",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "price", "type": "uint256" },
+          { "internalType": "bool", "name": "forSale", "type": "bool" },
+          {
+            "internalType": "uint256",
+            "name": "startingTime",
+            "type": "uint256"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct NFTMarket.MarketItem",
+        "name": "item",
+        "type": "tuple"
+      }
+    ],
+    "name": "ListMarketItem",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "initiator",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "nftContract",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint8",
+        "name": "marketEvent",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256[]",
+        "name": "tokenIds",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "ListMultipleMarketItems",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "initiator",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "itemId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint8",
+        "name": "marketEvent",
+        "type": "uint8"
+      },
+      {
+        "components": [
+          { "internalType": "uint256", "name": "itemId", "type": "uint256" },
+          {
+            "internalType": "address",
+            "name": "nftContract",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
+          {
+            "internalType": "address payable",
+            "name": "seller",
+            "type": "address"
+          },
+          {
+            "internalType": "address payable",
+            "name": "owner",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "price", "type": "uint256" },
+          { "internalType": "bool", "name": "forSale", "type": "bool" },
+          {
+            "internalType": "uint256",
+            "name": "startingTime",
+            "type": "uint256"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct NFTMarket.MarketItem",
+        "name": "marketItem",
+        "type": "tuple"
+      }
+    ],
+    "name": "MarketSale",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "initiator",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "itemId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint8",
+        "name": "marketEvent",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "platformFee",
+        "type": "uint256"
+      }
+    ],
+    "name": "MarketplaceCommissionTransaction",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "initiator",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "itemId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint8",
+        "name": "marketEvent",
+        "type": "uint8"
+      },
+      {
+        "components": [
+          { "internalType": "uint256", "name": "itemId", "type": "uint256" },
+          {
+            "internalType": "address",
+            "name": "nftContract",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
+          {
+            "internalType": "address payable",
+            "name": "seller",
+            "type": "address"
+          },
+          {
+            "internalType": "address payable",
+            "name": "owner",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "price", "type": "uint256" },
+          { "internalType": "bool", "name": "forSale", "type": "bool" },
+          {
+            "internalType": "uint256",
+            "name": "startingTime",
+            "type": "uint256"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct NFTMarket.MarketItem",
+        "name": "item",
+        "type": "tuple"
+      }
+    ],
+    "name": "UpdateMarketItem",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint16",
+        "name": "platformFee",
+        "type": "uint16"
+      }
+    ],
+    "name": "UpdatePlatformFee",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address payable",
+        "name": "platformFeeRecipient1",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address payable",
+        "name": "platformFeeRecipient2",
+        "type": "address"
+      }
+    ],
+    "name": "UpdatePlatformFeeRecipient",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_itemId", "type": "uint256" },
+      { "internalType": "address", "name": "_nftAddress", "type": "address" },
+      { "internalType": "uint256", "name": "_tokenId", "type": "uint256" }
+    ],
+    "name": "cancelListing",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_itemId", "type": "uint256" },
+      { "internalType": "address", "name": "_nftAddress", "type": "address" },
+      { "internalType": "uint256", "name": "_tokenId", "type": "uint256" },
+      { "internalType": "address", "name": "_owner", "type": "address" }
+    ],
+    "name": "createMarketSale",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "fetchItemsListed",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "itemId", "type": "uint256" },
+          {
+            "internalType": "address",
+            "name": "nftContract",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
+          {
+            "internalType": "address payable",
+            "name": "seller",
+            "type": "address"
+          },
+          {
+            "internalType": "address payable",
+            "name": "owner",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "price", "type": "uint256" },
+          { "internalType": "bool", "name": "forSale", "type": "bool" },
+          {
+            "internalType": "uint256",
+            "name": "startingTime",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct NFTMarket.MarketItem[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "fetchMarketItems",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "itemId", "type": "uint256" },
+          {
+            "internalType": "address",
+            "name": "nftContract",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
+          {
+            "internalType": "address payable",
+            "name": "seller",
+            "type": "address"
+          },
+          {
+            "internalType": "address payable",
+            "name": "owner",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "price", "type": "uint256" },
+          { "internalType": "bool", "name": "forSale", "type": "bool" },
+          {
+            "internalType": "uint256",
+            "name": "startingTime",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct NFTMarket.MarketItem[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "fetchMyNFTs",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "itemId", "type": "uint256" },
+          {
+            "internalType": "address",
+            "name": "nftContract",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
+          {
+            "internalType": "address payable",
+            "name": "seller",
+            "type": "address"
+          },
+          {
+            "internalType": "address payable",
+            "name": "owner",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "price", "type": "uint256" },
+          { "internalType": "bool", "name": "forSale", "type": "bool" },
+          {
+            "internalType": "uint256",
+            "name": "startingTime",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct NFTMarket.MarketItem[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "itemId", "type": "uint256" }
+    ],
+    "name": "getMarketItem",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "itemId", "type": "uint256" },
+          {
+            "internalType": "address",
+            "name": "nftContract",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
+          {
+            "internalType": "address payable",
+            "name": "seller",
+            "type": "address"
+          },
+          {
+            "internalType": "address payable",
+            "name": "owner",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "price", "type": "uint256" },
+          { "internalType": "bool", "name": "forSale", "type": "bool" },
+          {
+            "internalType": "uint256",
+            "name": "startingTime",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct NFTMarket.MarketItem",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "idToMarketItem",
+    "outputs": [
+      { "internalType": "uint256", "name": "itemId", "type": "uint256" },
+      { "internalType": "address", "name": "nftContract", "type": "address" },
+      { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
+      {
+        "internalType": "address payable",
+        "name": "seller",
+        "type": "address"
+      },
+      { "internalType": "address payable", "name": "owner", "type": "address" },
+      { "internalType": "uint256", "name": "price", "type": "uint256" },
+      { "internalType": "bool", "name": "forSale", "type": "bool" },
+      { "internalType": "uint256", "name": "startingTime", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_nftAddress", "type": "address" },
+      { "internalType": "uint256", "name": "_tokenId", "type": "uint256" },
+      { "internalType": "uint256", "name": "_askingPrice", "type": "uint256" },
+      { "internalType": "bool", "name": "_offerForSale", "type": "bool" }
+    ],
+    "name": "listCardItemForSale",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_nftAddress", "type": "address" },
+      { "internalType": "uint256", "name": "_tokenId", "type": "uint256" },
+      { "internalType": "uint256", "name": "_startingTime", "type": "uint256" }
+    ],
+    "name": "listItem",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_nftAddress", "type": "address" },
+      { "internalType": "uint256[]", "name": "_tokenIds", "type": "uint256[]" }
+    ],
+    "name": "listMultipleCards",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "uint256", "name": "", "type": "uint256" },
+      { "internalType": "address", "name": "", "type": "address" }
+    ],
+    "name": "listings",
+    "outputs": [
+      { "internalType": "uint256", "name": "itemId", "type": "uint256" },
+      { "internalType": "address", "name": "nftContract", "type": "address" },
+      { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
+      {
+        "internalType": "address payable",
+        "name": "seller",
+        "type": "address"
+      },
+      { "internalType": "address payable", "name": "owner", "type": "address" },
+      { "internalType": "uint256", "name": "price", "type": "uint256" },
+      { "internalType": "bool", "name": "forSale", "type": "bool" },
+      { "internalType": "uint256", "name": "startingTime", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "platformFee",
+    "outputs": [{ "internalType": "uint16", "name": "", "type": "uint16" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+    "name": "platformFeeRecipients",
+    "outputs": [
+      {
+        "internalType": "address payable",
+        "name": "platformFeeRecipient",
+        "type": "address"
+      },
+      { "internalType": "uint8", "name": "feePercent", "type": "uint8" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "newOwner", "type": "address" }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_itemId", "type": "uint256" },
+      { "internalType": "address", "name": "_nftAddress", "type": "address" },
+      { "internalType": "uint256", "name": "_tokenId", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "_newAskingPrice",
+        "type": "uint256"
+      },
+      { "internalType": "bool", "name": "_offerForSale", "type": "bool" }
+    ],
+    "name": "updateListing",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint16", "name": "_platformFee", "type": "uint16" }
+    ],
+    "name": "updatePlatformFee",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "address payable",
+            "name": "platformFeeRecipient",
+            "type": "address"
+          },
+          { "internalType": "uint8", "name": "feePercent", "type": "uint8" }
+        ],
+        "internalType": "struct NFTMarket.PlatformFee[]",
+        "name": "platformFeeInfo",
+        "type": "tuple[]"
+      }
+    ],
+    "name": "updatePlatformFeeRecipient",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
