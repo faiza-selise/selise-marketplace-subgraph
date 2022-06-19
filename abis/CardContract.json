@@ -1,0 +1,1667 @@
+[
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "approved",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "Approval",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "operator",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "approved",
+				"type": "bool"
+			}
+		],
+		"name": "ApprovalForAll",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "BurnTokenEvent",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256[]",
+				"name": "burnedTokenId",
+				"type": "uint256[]"
+			}
+		],
+		"name": "MergeCardEvent",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "enum CardUtils.CardType",
+				"name": "typeOfCard",
+				"type": "uint8"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "uuid",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "baseId",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "number",
+						"type": "uint32"
+					},
+					{
+						"internalType": "enum CardUtils.CardType",
+						"name": "cardType",
+						"type": "uint8"
+					},
+					{
+						"internalType": "string",
+						"name": "category",
+						"type": "string"
+					},
+					{
+						"internalType": "enum CardUtils.CardRarity",
+						"name": "rarity",
+						"type": "uint8"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct CardUtils.Card",
+				"name": "base",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "version",
+						"type": "uint32"
+					},
+					{
+						"internalType": "string",
+						"name": "illustrator",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "medias",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "animationUrl",
+						"type": "string"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct CardUtils.CardInfo",
+				"name": "info",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "uuid",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct CardUtils.CardOwner",
+				"name": "owner",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "alternative",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "foil",
+						"type": "bool"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct CardUtils.CardAttr",
+				"name": "attr",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "element",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "origin",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "faction",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "basePower",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint8",
+						"name": "potential",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "rank",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bool",
+						"name": "alternativeCombo",
+						"type": "bool"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct CardUtils.CardExtra",
+				"name": "extra",
+				"type": "tuple"
+			}
+		],
+		"name": "MintCardEvent",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "caller",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "message",
+				"type": "string"
+			}
+		],
+		"name": "MintedCompletedEvent",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "marketPlaceApprover",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "isApproved",
+				"type": "bool"
+			}
+		],
+		"name": "RegisterMarketPlaceEvent",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "Transfer",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "TransferNftEvent",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "enum CardUtils.CardType",
+				"name": "typeOfCard",
+				"type": "uint8"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "uuid",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "baseId",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "number",
+						"type": "uint32"
+					},
+					{
+						"internalType": "enum CardUtils.CardType",
+						"name": "cardType",
+						"type": "uint8"
+					},
+					{
+						"internalType": "string",
+						"name": "category",
+						"type": "string"
+					},
+					{
+						"internalType": "enum CardUtils.CardRarity",
+						"name": "rarity",
+						"type": "uint8"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct CardUtils.Card",
+				"name": "base",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "version",
+						"type": "uint32"
+					},
+					{
+						"internalType": "string",
+						"name": "illustrator",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "medias",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "animationUrl",
+						"type": "string"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct CardUtils.CardInfo",
+				"name": "info",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "uuid",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct CardUtils.CardOwner",
+				"name": "owner",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "alternative",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "foil",
+						"type": "bool"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct CardUtils.CardAttr",
+				"name": "attr",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "element",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "origin",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "faction",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "basePower",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint8",
+						"name": "potential",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "rank",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bool",
+						"name": "alternativeCombo",
+						"type": "bool"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct CardUtils.CardExtra",
+				"name": "extra",
+				"type": "tuple"
+			}
+		],
+		"name": "UpdateCardEvent",
+		"type": "event"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "fallback"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "CARDS",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "uuid",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "id",
+				"type": "string"
+			},
+			{
+				"internalType": "uint32",
+				"name": "baseId",
+				"type": "uint32"
+			},
+			{
+				"internalType": "uint32",
+				"name": "number",
+				"type": "uint32"
+			},
+			{
+				"internalType": "enum CardUtils.CardType",
+				"name": "cardType",
+				"type": "uint8"
+			},
+			{
+				"internalType": "string",
+				"name": "category",
+				"type": "string"
+			},
+			{
+				"internalType": "enum CardUtils.CardRarity",
+				"name": "rarity",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "COMMON",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "GetLastMintedTokenId",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "MYTHIC",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "RARE",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "TransferNft",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "ULTRA_RARE",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "UNCOMMON",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "approve",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			}
+		],
+		"name": "balanceOf",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "battleCard",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "uuid",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "baseId",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "number",
+						"type": "uint32"
+					},
+					{
+						"internalType": "enum CardUtils.CardType",
+						"name": "cardType",
+						"type": "uint8"
+					},
+					{
+						"internalType": "string",
+						"name": "category",
+						"type": "string"
+					},
+					{
+						"internalType": "enum CardUtils.CardRarity",
+						"name": "rarity",
+						"type": "uint8"
+					}
+				],
+				"internalType": "struct CardUtils.Card",
+				"name": "base",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "version",
+						"type": "uint32"
+					},
+					{
+						"internalType": "string",
+						"name": "illustrator",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "medias",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "animationUrl",
+						"type": "string"
+					}
+				],
+				"internalType": "struct CardUtils.CardInfo",
+				"name": "info",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "uuid",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"internalType": "struct CardUtils.CardOwner",
+				"name": "owner",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "alternative",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "foil",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct CardUtils.CardAttr",
+				"name": "attr",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "element",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "origin",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "faction",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "basePower",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint8",
+						"name": "potential",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "rank",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bool",
+						"name": "alternativeCombo",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct CardUtils.CardExtra",
+				"name": "extra",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "burnToken",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "getApproved",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "operator",
+				"type": "address"
+			}
+		],
+		"name": "isApprovedForAll",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "lastMintedTokenId",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "enum CardUtils.CardType",
+				"name": "typeOfCard",
+				"type": "uint8"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "uuid",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "baseId",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "number",
+						"type": "uint32"
+					},
+					{
+						"internalType": "enum CardUtils.CardType",
+						"name": "cardType",
+						"type": "uint8"
+					},
+					{
+						"internalType": "string",
+						"name": "category",
+						"type": "string"
+					},
+					{
+						"internalType": "enum CardUtils.CardRarity",
+						"name": "rarity",
+						"type": "uint8"
+					}
+				],
+				"internalType": "struct CardUtils.Card",
+				"name": "base",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "version",
+						"type": "uint32"
+					},
+					{
+						"internalType": "string",
+						"name": "illustrator",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "medias",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "animationUrl",
+						"type": "string"
+					}
+				],
+				"internalType": "struct CardUtils.CardInfo",
+				"name": "info",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "uuid",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"internalType": "struct CardUtils.CardOwner",
+				"name": "owner",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "alternative",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "foil",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct CardUtils.CardAttr",
+				"name": "attr",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "element",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "origin",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "faction",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "basePower",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint8",
+						"name": "potential",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "rank",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bool",
+						"name": "alternativeCombo",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct CardUtils.CardExtra",
+				"name": "extra",
+				"type": "tuple"
+			}
+		],
+		"name": "mintCard",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "name",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "normalCard",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "uuid",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "baseId",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "number",
+						"type": "uint32"
+					},
+					{
+						"internalType": "enum CardUtils.CardType",
+						"name": "cardType",
+						"type": "uint8"
+					},
+					{
+						"internalType": "string",
+						"name": "category",
+						"type": "string"
+					},
+					{
+						"internalType": "enum CardUtils.CardRarity",
+						"name": "rarity",
+						"type": "uint8"
+					}
+				],
+				"internalType": "struct CardUtils.Card",
+				"name": "base",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "version",
+						"type": "uint32"
+					},
+					{
+						"internalType": "string",
+						"name": "illustrator",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "medias",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "animationUrl",
+						"type": "string"
+					}
+				],
+				"internalType": "struct CardUtils.CardInfo",
+				"name": "info",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "uuid",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"internalType": "struct CardUtils.CardOwner",
+				"name": "owner",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "alternative",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "foil",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct CardUtils.CardAttr",
+				"name": "attr",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "ownerOf",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "marketPlace",
+				"type": "address"
+			}
+		],
+		"name": "registerMarketPlace",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "safeTransferFrom",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "_data",
+				"type": "bytes"
+			}
+		],
+		"name": "safeTransferFrom",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "operator",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "approved",
+				"type": "bool"
+			}
+		],
+		"name": "setApprovalForAll",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes4",
+				"name": "interfaceId",
+				"type": "bytes4"
+			}
+		],
+		"name": "supportsInterface",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "symbol",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "tokenURI",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "transferFrom",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "uuid",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "baseId",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "number",
+						"type": "uint32"
+					},
+					{
+						"internalType": "enum CardUtils.CardType",
+						"name": "cardType",
+						"type": "uint8"
+					},
+					{
+						"internalType": "string",
+						"name": "category",
+						"type": "string"
+					},
+					{
+						"internalType": "enum CardUtils.CardRarity",
+						"name": "rarity",
+						"type": "uint8"
+					}
+				],
+				"internalType": "struct CardUtils.Card",
+				"name": "base",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "version",
+						"type": "uint32"
+					},
+					{
+						"internalType": "string",
+						"name": "illustrator",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "medias",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "animationUrl",
+						"type": "string"
+					}
+				],
+				"internalType": "struct CardUtils.CardInfo",
+				"name": "info",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "uuid",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"internalType": "struct CardUtils.CardOwner",
+				"name": "owner",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "alternative",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "foil",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct CardUtils.CardAttr",
+				"name": "attr",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "element",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "origin",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "faction",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "basePower",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint8",
+						"name": "potential",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "rank",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bool",
+						"name": "alternativeCombo",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct CardUtils.CardExtra",
+				"name": "extra",
+				"type": "tuple"
+			}
+		],
+		"name": "updateCard",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "receive"
+	}
+]

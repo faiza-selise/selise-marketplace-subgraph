@@ -1,3 +1,4 @@
+import { BigInt, Entity } from "@graphprotocol/graph-ts"
 import {
   CancelMarketItem as CancelMarketItemEvent,
   ListMarketItem as ListMarketItemEvent,
@@ -8,84 +9,108 @@ import {
   UpdateMarketItem as UpdateMarketItemEvent,
   UpdatePlatformFee as UpdatePlatformFeeEvent,
   UpdatePlatformFeeRecipient as UpdatePlatformFeeRecipientEvent
-} from "../generated/Marketplace/Marketplace"
+} from "../generated/SeliseMarketplace/Marketplace"
 import {
-  CancelMarketItem,
-  ListMarketItem,
-  ListMultipleMarketItems,
-  MarketSale,
   MarketplaceCommissionTransaction,
   OwnershipTransferred,
-  UpdateMarketItem,
   UpdatePlatformFee,
-  UpdatePlatformFeeRecipient
+  UpdatePlatformFeeRecipient,
+  MarketActivity,
+  MarketItem,
+  MarketSale,
+  Card
 } from "../generated/schema"
 
-export function handleCancelMarketItem(event: CancelMarketItemEvent): void {
-  let entity = new CancelMarketItem(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.initiator = event.params.initiator
-  entity.itemId = event.params.itemId
-  entity.marketEvent = event.params.marketEvent
-  entity.item_itemId = event.params.item.itemId
-  entity.item_nftContract = event.params.item.nftContract
-  entity.item_tokenId = event.params.item.tokenId
-  entity.item_seller = event.params.item.seller
-  entity.item_owner = event.params.item.owner
-  entity.item_price = event.params.item.price
-  entity.item_forSale = event.params.item.forSale
-  entity.item_startingTime = event.params.item.startingTime
-  entity.save()
-}
-
 export function handleListMarketItem(event: ListMarketItemEvent): void {
-  let entity = new ListMarketItem(
+  let entity = new MarketActivity(
     event.transaction.hash.toHex() + "-" + event.logIndex.toString()
   )
+
+
   entity.initiator = event.params.initiator
   entity.itemId = event.params.itemId
   entity.marketEvent = event.params.marketEvent
-  entity.item_itemId = event.params.item.itemId
-  entity.item_nftContract = event.params.item.nftContract
-  entity.item_tokenId = event.params.item.tokenId
-  entity.item_seller = event.params.item.seller
-  entity.item_owner = event.params.item.owner
-  entity.item_price = event.params.item.price
-  entity.item_forSale = event.params.item.forSale
-  entity.item_startingTime = event.params.item.startingTime
-  entity.save()
+  let item = MarketItem.load(event.params.itemId.toHexString());
+  if (!item) {
+    item = new MarketItem(event.params.itemId.toHexString());
+  }
+
+  item.itemId = event.params.item.itemId
+  item.nftContractAddress = event.params.item.nftContract
+  item.tokenId = event.params.item.tokenId
+  item.seller = event.params.item.seller
+  item.owner = event.params.item.owner
+  item.price = event.params.item.price
+  item.forSale = event.params.item.forSale
+  item.startingTime = event.params.item.startingTime
+  item.isListed= true;
+  let cardInfo =  Card.load(event.params.item.tokenId.toHex())
+  if (!cardInfo) {
+    cardInfo = new Card(event.params.item.tokenId.toHex())
+  }
+
+  item.card = event.params.item.tokenId.toHexString();
+
+  item.save();
+  entity.item = event.params.item.itemId.toHexString()
+
+
+ entity.save();
 }
 
-export function handleListMultipleMarketItems(
-  event: ListMultipleMarketItemsEvent
-): void {
-  let entity = new ListMultipleMarketItems(
+
+export function handleCancelMarketItem(event: CancelMarketItemEvent): void {
+  let entity = new MarketActivity(
     event.transaction.hash.toHex() + "-" + event.logIndex.toString()
   )
+
+
   entity.initiator = event.params.initiator
-  entity.nftContract = event.params.nftContract
+  entity.itemId = event.params.itemId
   entity.marketEvent = event.params.marketEvent
-  entity.tokenIds = event.params.tokenIds
-  entity.save()
+  let item = MarketItem.load(event.params.itemId.toHexString());
+  if (!item) {
+    item = new MarketItem(event.params.itemId.toHexString());
+  }
+
+  item.isListed = false;
+  item.save();
+
+ entity.save();
 }
+
+
 
 export function handleMarketSale(event: MarketSaleEvent): void {
-  let entity = new MarketSale(
+  let entity = new MarketActivity(
     event.transaction.hash.toHex() + "-" + event.logIndex.toString()
   )
   entity.initiator = event.params.initiator
   entity.itemId = event.params.itemId
   entity.marketEvent = event.params.marketEvent
-  entity.marketItem_itemId = event.params.marketItem.itemId
-  entity.marketItem_nftContract = event.params.marketItem.nftContract
-  entity.marketItem_tokenId = event.params.marketItem.tokenId
-  entity.marketItem_seller = event.params.marketItem.seller
-  entity.marketItem_owner = event.params.marketItem.owner
-  entity.marketItem_price = event.params.marketItem.price
-  entity.marketItem_forSale = event.params.marketItem.forSale
-  entity.marketItem_startingTime = event.params.marketItem.startingTime
-  entity.save()
+  let item = MarketItem.load(event.params.itemId.toHexString());
+  if (!item) {
+    item = new MarketItem(event.params.itemId.toHexString());
+  }
+  let seller  = item.owner;
+  let newowner =  event.params.initiator
+  item.seller = item.owner
+  item.owner = event.params.initiator
+  item.price = BigInt.fromI32(0);
+  item.forSale = false
+  item.isListed = false;
+item.save();
+  entity.item = event.params.itemId.toHexString()
+ entity.save();
+let updatedItem = MarketItem.load(event.params.itemId.toHexString());
+
+//  let marketSale =  new MarketSale( event.transaction.hash.toHex() + "-" + event.params.itemId.toHexString());
+//   marketSale.initiator = event.params.initiator
+//   marketSale.itemId = event.params.itemId
+//   marketSale.seller = updatedItem.seller
+//   marketSale.tokenId  = updatedItem.tokenId
+
+
 }
 
 export function handleMarketplaceCommissionTransaction(
@@ -113,21 +138,32 @@ export function handleOwnershipTransferred(
 }
 
 export function handleUpdateMarketItem(event: UpdateMarketItemEvent): void {
-  let entity = new UpdateMarketItem(
+  let entity = new MarketActivity(
     event.transaction.hash.toHex() + "-" + event.logIndex.toString()
   )
   entity.initiator = event.params.initiator
   entity.itemId = event.params.itemId
-  entity.marketEvent = event.params.marketEvent
-  entity.item_itemId = event.params.item.itemId
-  entity.item_nftContract = event.params.item.nftContract
-  entity.item_tokenId = event.params.item.tokenId
-  entity.item_seller = event.params.item.seller
-  entity.item_owner = event.params.item.owner
-  entity.item_price = event.params.item.price
-  entity.item_forSale = event.params.item.forSale
-  entity.item_startingTime = event.params.item.startingTime
-  entity.save()
+  entity.marketEvent = (event.params.marketEvent)
+  let item = MarketItem.load(event.params.itemId.toHexString());
+  if (!item) {
+    item = new MarketItem(event.params.itemId.toHexString());
+  }
+
+  item.itemId = event.params.item.itemId
+  item.nftContractAddress = event.params.item.nftContract
+  item.tokenId = event.params.item.tokenId
+  item.seller = event.params.item.seller
+  item.owner = event.params.item.owner
+  item.price = event.params.item.price
+  item.forSale = event.params.item.forSale
+  item.startingTime = event.params.item.startingTime
+  item.isListed= true;
+
+  item.save();
+  entity.item = event.params.item.itemId.toHexString()
+
+
+ entity.save();
 }
 
 export function handleUpdatePlatformFee(event: UpdatePlatformFeeEvent): void {

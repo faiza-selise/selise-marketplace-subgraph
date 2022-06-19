@@ -4,10 +4,10 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ faiza/marketplace-subgraph-test",
-    "create-local": "graph create --node http://localhost:8020/ faiza/marketplace-subgraph-test",
-    "remove-local": "graph remove --node http://localhost:8020/ faiza/marketplace-subgraph-test",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 faiza/marketplace-subgraph-test"
+    "deploy": "graph deploy --ipfs http://ec2-3-66-175-30.eu-central-1.compute.amazonaws.com:5001 --node http://ec2-3-66-175-30.eu-central-1.compute.amazonaws.com:8020 faiza/marketplace-subgraph-queries ./subgraph.yaml ",
+    "create-local": "graph create --node http://ec2-3-66-175-30.eu-central-1.compute.amazonaws.com:8020 faiza/marketplace-subgraph-queries  faiza/marketplace-subgraph-queries",
+    "remove-local": "graph remove --node http://localhost:8020/ faiza/marketplace-subgraph-queries",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 faiza/marketplace-subgraph-queries"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.30.2",

@@ -1,6 +1,6 @@
 specVersion: 0.0.4
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: SeliseMarketplace
@@ -23,32 +23,36 @@ dataSources:
         - UpdatePlatformFeeRecipient
       abis:
         - name: Marketplace
-          file: ./abis/Marketplace.json
+          file: SeliseMarketplace\abis\Marketplace.json
       eventHandlers:
-        - event: CancelMarketItem(address,indexed uint256,indexed uint8,(uint256,address,uint256,address,address,uint256,bool,uint256))
+        - event: CancelMarketItem(address,indexed uint256,indexed
+            uint8,(uint256,address,uint256,address,address,uint256,bool,uint256))
           handler: handleCancelMarketItem
-        - event: ListMarketItem(address,indexed uint256,indexed uint8,(uint256,address,uint256,address,address,uint256,bool,uint256))
+        - event: ListMarketItem(address,indexed uint256,indexed
+            uint8,(uint256,address,uint256,address,address,uint256,bool,uint256))
           handler: handleListMarketItem
-        - event: MarketSale(address,indexed uint256,indexed uint8,(uint256,address,uint256,address,address,uint256,bool,uint256))
+        - event: MarketSale(address,indexed uint256,indexed
+            uint8,(uint256,address,uint256,address,address,uint256,bool,uint256))
           handler: handleMarketSale
         - event: MarketplaceCommissionTransaction(address,indexed uint256,indexed uint8,uint256)
           handler: handleMarketplaceCommissionTransaction
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
-        - event: UpdateMarketItem(address,indexed uint256,indexed uint8,(uint256,address,uint256,address,address,uint256,bool,uint256))
+        - event: UpdateMarketItem(address,indexed uint256,indexed
+            uint8,(uint256,address,uint256,address,address,uint256,bool,uint256))
           handler: handleUpdateMarketItem
         - event: UpdatePlatformFee(uint16)
           handler: handleUpdatePlatformFee
         - event: UpdatePlatformFeeRecipient(address,address)
           handler: handleUpdatePlatformFeeRecipient
-      file: ./src/marketplace.ts
+      file: SeliseMarketplace\SeliseMarketplace.wasm
   - kind: ethereum/contract
-    name: SeliseNFT 
+    name: SeliseNFT
     network: goerli
     source:
       address: "0x6fCB74D2905D960fa027CC00D924Afd8f2a50627"
       abi: CTANFT
-      startBlock: 7067825     
+      startBlock: 7067825
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -67,7 +71,7 @@ dataSources:
         - Card
       abis:
         - name: CTANFT
-          file: ./abis/CardContract.json
+          file: SeliseNFT\abis\CardContract.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,indexed uint256)
           handler: handleApproval
@@ -77,7 +81,8 @@ dataSources:
           handler: handleBurnTokenEvent
         - event: MergeCardEvent(indexed uint256,uint256[])
           handler: handleMergeCardEvent
-        - event: MintCardEvent(indexed address,indexed uint256,uint8,(string,string,uint32,uint32,uint8,string,uint8),(string,string,uint32,string,string,string),(string,address),(bool,bool),(string,string,string,uint32,uint8,uint8,bool))
+        - event: MintCardEvent(indexed address,indexed
+            uint256,uint8,(string,string,uint32,uint32,uint8,string,uint8),(string,string,uint32,string,string,string),(string,address),(bool,bool),(string,string,string,uint32,uint8,uint8,bool))
           handler: handleMintCardEvent
         - event: MintedCompletedEvent(address,uint256,string)
           handler: handleMintedCompletedEvent
@@ -87,6 +92,7 @@ dataSources:
           handler: handleTransfer
         - event: TransferNftEvent(indexed address,indexed address,indexed uint256)
           handler: handleTransferNftEvent
-        - event: UpdateCardEvent(indexed uint256,uint8,(string,string,uint32,uint32,uint8,string,uint8),(string,string,uint32,string,string,string),(string,address),(bool,bool),(string,string,string,uint32,uint8,uint8,bool))
+        - event: UpdateCardEvent(indexed
+            uint256,uint8,(string,string,uint32,uint32,uint8,string,uint8),(string,string,uint32,string,string,string),(string,address),(bool,bool),(string,string,string,uint32,uint8,uint8,bool))
           handler: handleUpdateCardEvent
-      file: ./src/CardContract.ts
+      file: SeliseNFT\SeliseNFT.wasm
